@@ -10,21 +10,19 @@ import 'results_page.dart';
 
 enum Gender { MALE, FEMALE }
 
-class InputPage extends StatefulWidget {
+class InputPage extends StatefulWidget{
   const InputPage({super.key});
-
   @override
   State<InputPage> createState() => _InputPageState();
-}
 
+}
 class _InputPageState extends State<InputPage> {
   Gender selectedGender = Gender.MALE;
-  int height = 180;
-  int weight = 60;
-  int age = 18;
-
+  int height= 180;
+  int weight= 60;
+  int age= 18;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
@@ -39,33 +37,39 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     onPress: () {
-                      setState(() {
+                      setState( ()  {
                         selectedGender = Gender.MALE;
+
                       });
+
                     },
                     color: (selectedGender == Gender.MALE)
-                        ? kActiveCardColor
-                        : kActiveCardColor,
+                      ? kActiveCardColor
+                        : kInactiveCardColor,
                     cardChild: IconContent(
                       icon: FontAwesomeIcons.mars,
                       label: 'MALE',
                     ),
+
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
                     onPress: () {
                       setState(() {
-                        selectedGender = Gender.FEMALE;
+                        selectedGender= Gender.FEMALE;
+
                       });
+
                     },
-                    color: (selectedGender == Gender.FEMALE)
-                        ? kActiveCardColor
-                        : kActiveCardColor,
+                    color:(selectedGender == Gender.FEMALE)
+                      ?kActiveCardColor
+                        :kInactiveCardColor,
                     cardChild: IconContent(
                       icon: FontAwesomeIcons.venus,
-                      label: 'FEMALE',
+                      label:'FEMALE',
                     ),
+
                   ),
                 ),
               ],
@@ -86,6 +90,7 @@ class _InputPageState extends State<InputPage> {
                     children: [
                       Text('$height', style: kNumberTextStyle),
                       Text('cm', style: kLabelTextStyle),
+
                     ],
                   ),
                   SliderTheme(
@@ -94,26 +99,30 @@ class _InputPageState extends State<InputPage> {
                       overlayColor: Color(0x1FEB1555),
                       activeTrackColor: Colors.white,
                       inactiveTrackColor: Color(0xFF8D8E98),
-                      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      thumbShape:RoundSliderThumbShape(enabledThumbRadius: 15.0),
                       overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
+
+
                     ),
                     child: Slider(
-                      min: 120.0,
+                      min:120.0,
                       max: 220.0,
                       value: height.toDouble(),
                       onChanged: (double newValue) {
                         setState(() {
-                          height = newValue.round();
+                          height= newValue.round();
                         });
                       },
                     ),
-                  ),
+
+                  )
                 ],
               ),
             ),
+
           ),
           Expanded(
-            child: Row(
+            child: Row (
               children: [
                 Expanded(
                   child: ReusableCard(
@@ -134,10 +143,11 @@ class _InputPageState extends State<InputPage> {
                             SizedBox(width: 10.0),
                             RoundIconButton(
                               icon: FontAwesomeIcons.plus,
-                              onPressed: () => setState(() => weight++),
+                              onPressed: () => setState(() => weight++)
                             ),
                           ],
                         ),
+
                       ],
                     ),
                   ),
@@ -156,7 +166,7 @@ class _InputPageState extends State<InputPage> {
                           children: [
                             RoundIconButton(
                               icon: FontAwesomeIcons.minus,
-                              onPressed: () => setState(() => age--),
+                              onPressed: () => setState(() => age--)
                             ),
                             SizedBox(width: 10.0),
                             RoundIconButton(
@@ -171,11 +181,12 @@ class _InputPageState extends State<InputPage> {
                 ),
               ],
             ),
+
           ),
-          BottomButton(
+          BottomButton (
             buttonTitle: 'CALCULATE',
             onPressed: () {
-              CalculatorBrain calc = CalculatorBrain(height: height, weight: weight);
+              CalculatorBrain calc= CalculatorBrain(height: height, weight: weight);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -183,13 +194,19 @@ class _InputPageState extends State<InputPage> {
                     bmiResult: calc.calculateBMI(),
                     resultText: calc.getResult(),
                     interpretation: calc.getInterpretation(),
+
+
+
                   ),
+
                 ),
               );
             },
           ),
         ],
+
       ),
+
     );
   }
 }
